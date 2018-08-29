@@ -16,8 +16,6 @@
 
 package com.google.zxing.client.android;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -193,11 +191,10 @@ public final class HttpHelper {
       conn = url.openConnection();
     } catch (NullPointerException npe) {
       // Another strange bug in Android?
-      Log.w(TAG, "Bad URI? " + url);
       throw new IOException(npe);
     }
     if (!(conn instanceof HttpURLConnection)) {
-      throw new IOException();
+      throw new IOException("Expected HttpURLConnection but got " + conn.getClass());
     }
     return (HttpURLConnection) conn;
   }
