@@ -100,11 +100,11 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
 
   /**
    * @return the 3 best {@link FinderPattern}s from our list of candidates. The "best" are
-   *         those that have been detected at least {@link #CENTER_QUORUM} times, and whose module
+   *         those that have been detected at least 2 times, and whose module
    *         size differs from the average among those patterns the least
    * @throws NotFoundException if 3 such finder patterns do not exist
    */
-  private FinderPattern[][] selectMutipleBestPatterns() throws NotFoundException {
+  private FinderPattern[][] selectMultipleBestPatterns() throws NotFoundException {
     List<FinderPattern> possibleCenters = getPossibleCenters();
     int size = possibleCenters.size();
 
@@ -282,7 +282,7 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
         handlePossibleCenter(stateCount, i, maxJ);
       }
     } // for i=iSkip-1 ...
-    FinderPattern[][] patternInfo = selectMutipleBestPatterns();
+    FinderPattern[][] patternInfo = selectMultipleBestPatterns();
     List<FinderPatternInfo> result = new ArrayList<>();
     for (FinderPattern[] pattern : patternInfo) {
       ResultPoint.orderBestPatterns(pattern);
